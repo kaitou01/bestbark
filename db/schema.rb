@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171102041356) do
+ActiveRecord::Schema.define(version: 20171102044819) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -58,6 +58,8 @@ ActiveRecord::Schema.define(version: 20171102041356) do
     t.string "postal_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "province_id"
+    t.index ["province_id"], name: "index_customers_on_province_id"
   end
 
   create_table "line_items", force: :cascade do |t|
@@ -65,6 +67,10 @@ ActiveRecord::Schema.define(version: 20171102041356) do
     t.decimal "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "product_id"
+    t.integer "order_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -74,6 +80,8 @@ ActiveRecord::Schema.define(version: 20171102041356) do
     t.decimal "hst_rate"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "customer_id"
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -83,6 +91,8 @@ ActiveRecord::Schema.define(version: 20171102041356) do
     t.integer "quantity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "category_id"
+    t.index ["category_id"], name: "index_products_on_category_id"
   end
 
   create_table "provinces", force: :cascade do |t|
