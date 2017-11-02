@@ -1,5 +1,5 @@
 ActiveAdmin.register Category do
 
-  permit_params :name, :description, :price, :quantity
+    permit_params :name
 
 end

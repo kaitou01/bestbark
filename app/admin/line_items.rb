@@ -1,5 +1,5 @@
 ActiveAdmin.register LineItem do
 
-  permit_params :quantity, :price
+    permit_params :quantity, :price
 
 end
