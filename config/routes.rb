@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'products/index'
+
+    get 'products', to: 'products#index', as: 'products'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
