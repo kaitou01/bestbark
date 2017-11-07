@@ -9,8 +9,11 @@
   </head>
 
   <body>
+    <%= render partial: 'common/header' %>
     <%= render partial: 'products/category' %>
 
     <%= yield %>
+
+    <%= render partial: 'common/footer' %>
   </body>
 </html>

@@ -1,5 +1,5 @@
 <div class="product">
-  <h2><%= product.name %></h2>
+  <h2><%= link_to product.name, product_path(product.id) %></h2>
   <p><%= image_tag product.image %></p>
   <h3>$<%= product.price %> (<%= product.quantity %> left)</p>
 </div>

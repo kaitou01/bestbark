@@ -2,7 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-img {
+.product img {
   height: 220px;
   width: 220px;
 }
@@ -24,7 +24,7 @@ img {
 
 .categories ul{
     border:1px solid #ccc;
-    border-width:1px 0;
+    border-width:1px;
     list-style:none;
     margin:0;
     padding:0;
@@ -37,4 +37,13 @@ img {
 .categories ul li a{
     display:inline-block;
     padding: 10px 50px;
+}
+
+.single-product {
+  width: 500px;
+  margin: auto;
+  margin-top: 20px;
+  border:1px solid #ccc;
+  border-width: 1px;
+  padding: 0px 20px;
 }

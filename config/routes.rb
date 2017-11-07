@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   get 'category/:id', to: 'products#show_by_category', as: 'category', id: /\d+/
 
+  get 'product/:id', to: 'products#show', as: 'product', id: /\d+/
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
