@@ -21,3 +21,20 @@ img {
 .product h2{
   height: 104px;
 }
+
+.categories ul{
+    border:1px solid #ccc;
+    border-width:1px 0;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:center;
+}
+.categories ul li{
+    display:inline;
+    font: 20px bold;
+}
+.categories ul li a{
+    display:inline-block;
+    padding: 10px 50px;
+}
