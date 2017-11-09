@@ -1,3 +1,4 @@
+# CreateActiveAdminComments Migration
 class CreateActiveAdminComments < ActiveRecord::Migration::Current
   def self.up
     create_table :active_admin_comments do |t|

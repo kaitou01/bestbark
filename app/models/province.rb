@@ -1,3 +1,4 @@
+# Province model
 class Province < ApplicationRecord
   has_many :customers
 

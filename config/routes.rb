@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'products#index'
 
   get 'category/:id', to: 'products#show_by_category', as: 'category', id: /\d+/
