@@ -1,0 +1,5 @@
+.product
+  h2= link_to product.name, product_path(product.id)
+  p= image_tag product.image
+  h3
+    | $#{product.price} (#{product.quantity} left)

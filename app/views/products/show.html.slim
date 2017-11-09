@@ -1,0 +1,6 @@
+.single-product
+  h2= @product.name
+  p= image_tag @product.image
+  h3
+    | $#{@product.price} (#{@product.quantity} left)
+  p= @product.description
