@@ -1,7 +1,8 @@
 # Controller for the products model
 class ProductsController < ApplicationController
   def index
-    @products = Product.order(:name).page(params[:page]).per(5)
+    # @products = Product.order(:name).page(params[:page]).per(5)
+    @products = Product.page(params[:page]).per(5).search(params[:search], params[:category])
   end
 
   def show_by_category
