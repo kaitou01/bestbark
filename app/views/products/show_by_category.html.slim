@@ -1,5 +1,5 @@
 h1= @products.first.category.name
-.products
+.row
   = render partial: 'product', collection: @products
 .page
   = paginate @products
