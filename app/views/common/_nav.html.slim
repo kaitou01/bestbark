@@ -12,3 +12,7 @@ nav.navbar.navbar-expand-md.navbar-dark.bg-dark
           .dropdown-menu aria-labelledby="navbarDropdown"
             - @categories.each do |category|
               =link_to category.name, category_path(category.id), class: "dropdown-item"
+      = form_tag root_path, method: :get, class: "form-inline my-2 my-md-0" do
+        = text_field_tag :search, params[:search]
+        = select_tag(:category_id, options_for_select(@categories.map {|c| [c.name, c.id]}), { include_blank: "All"})
+        = submit_tag 'Search', name: nil
