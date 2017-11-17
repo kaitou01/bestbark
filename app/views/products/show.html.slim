@@ -4,3 +4,12 @@
   h3
     | $#{@product.price} (#{@product.quantity} left)
   p= @product.description
+.single-product
+  - if @products_to_buy.include?(@product)
+    = link_to remove_item_from_cart_product_path(@product), method: :post, class: "btn btn-info btn-lg" do
+      span.glyphicon.glyphicon-shopping-cart
+      | Remove from cart
+  - else
+    = link_to add_to_cart_product_path(@product), method: :post, class: "btn btn-info btn-lg" do
+      span.glyphicon.glyphicon-shopping-cart
+      | Add to cart
