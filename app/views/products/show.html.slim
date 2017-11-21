@@ -1,6 +1,6 @@
 .single-product
   h2= @product.name
-  p= image_tag @product.image
+  p= image_tag @product.image.url(:large)
   h3
     | $#{@product.price} (#{@product.quantity} left)
   p= @product.description

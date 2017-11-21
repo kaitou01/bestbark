@@ -1,5 +1,5 @@
 .col-sm.card
-    = image_tag product.image, class: "card-img-top"
+    = image_tag product.image.url(:large), class: "card-img-top"
     .card-body
       h4.card-title= link_to product.name, product_path(product.id)
       p.card-text
