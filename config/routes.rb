@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   get 'contact', to: 'pages#contact', as: 'contact'
 
+  get 'shopping-cart', to: 'products#load_shopping_cart', as: 'cart'
+
+  post 'update-quantity', to: 'products#update_item', as: 'update_item'
+
   resources :products, only: [:show] do
     member do
       post :add_to_cart
