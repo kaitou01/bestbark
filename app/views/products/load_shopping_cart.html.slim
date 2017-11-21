@@ -1,0 +1,65 @@
+.row
+  .col-sm-12
+    table.table.table-hover
+      thead
+        tr
+          th Product
+          th Quantity
+          th.text-center Price
+          th.text-center Total
+          th  
+          th
+      tbody
+        - order_subtotal = 0
+        - @products_to_buy.each do |product|
+          - item = product["product"]
+          - product_subtotal = item["price"].to_f * product["quantity"]
+          - order_subtotal += product_subtotal
+          tr
+            td.col-sm-8.col-md-6
+              .media
+                = link_to image_tag(item["image"], class: "media-object", style: "width: 72px; height: 72px;"),  product_path(item["id"]), class: "thumbnail pull-left"
+                .media-body
+                  h4.media-heading
+                    = link_to truncate(item["name"], length: 30)
+                  span Status:
+                  - if item["quantity"].to_i > 0
+                    span.text-success
+                      strong In Stock
+                  - else
+                    span.text-warning
+                      strong Out of Stock
+              td.col-sm-1.col-md-1 style=("text-align: center")
+                = form_tag(update_item_path, method: :post) do
+                  = hidden_field_tag(:id, item["id"])
+                  = text_field_tag(:quantity, product["quantity"])
+                  = submit_tag("Update")
+              td.col-sm-1.col-md-1.text-center
+                strong
+                  | $
+                  = item["price"]
+              td.col-sm-1.col-md-1.text-center
+                strong
+                  | $
+                  = product_subtotal
+              td.col-sm-1.col-md-1
+              td.col-sm-1.col-md-1
+                = link_to "Remove", remove_item_from_cart_product_path(item["id"]), method: :post
+        tr
+          td  
+          td  
+          td  
+          td
+            h5 Subtotal
+          td.text-right
+            h5
+              strong= order_subtotal
+        tr
+          td  
+          td  
+          td  
+          td
+          td
+            button.btn.btn-success type="button"
+              | Checkout
+              span.glyphicon.glyphicon-play
