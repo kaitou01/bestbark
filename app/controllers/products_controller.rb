@@ -1,7 +1,7 @@
 # Controller for the products model
 class ProductsController < ApplicationController
   before_action :initialize_session
-  before_action :load_shopping_cart, only: [:index, :show]
+  before_action :load_shopping_cart, only: [:show, :load_shopping_cart]
 
   def index
     # @products = Product.order(:name).page(params[:page]).per(5)
@@ -17,22 +17,45 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
+  # def show_shopping_cart
+  #
+  #   @shopping_cart = session[:products_to_buy]
+  #   @shopping_cart.each do |s|
+  #     s["id"] = Product.find(s["id"]) if s["id"].is_a? Integer
+  #   end
+  # end
+
   def add_to_cart
     id = params[:id].to_i
-    session[:products_to_buy] << id unless session[:products_to_buy].include?(id)
-    redirect_to product_path(id), notice: "Successfully added product to cart."
+    quantity = params[:quantity].to_i || 1
+
+    product_hash = {"product" => Product.find(id), "quantity" => quantity}
+
+    session[:products_to_buy] << product_hash unless session[:products_to_buy].any? {|p| p["product"] == Product.find(id)}
+    redirect_back fallback_location: root_path, notice: "Successfully added product to cart."
   end
 
   def remove_item_from_cart
     id = params[:id].to_i
-    session[:products_to_buy].delete(id)
+    session[:products_to_buy] = session[:products_to_buy].reject { |p| p["product"]["id"] == id }
 
-    redirect_to product_path(id), notice: "Marked Customer As Called"
+    redirect_back fallback_location: root_path, notice: "Item removed."
   end
 
   def empty_cart
     session[:products_to_buy] = []
-    redirect_to root_url, notice: "Cart emptied."
+    redirect_back fallback_location: root_path, notice: "Cart emptied."
+  end
+
+  def update_item
+    id = params[:id].to_i
+    quantity = params[:quantity].to_i
+
+    session[:products_to_buy].each do |s|
+      s["quantity"] = quantity if s["product"]["id"] == id
+    end
+
+    redirect_back fallback_location: root_path, notice: "Updated."
   end
 
   private
@@ -42,6 +65,6 @@ class ProductsController < ApplicationController
   end
 
   def load_shopping_cart
-    @products_to_buy = Product.find(session[:products_to_buy])
+    @products_to_buy = session[:products_to_buy]
   end
 end
