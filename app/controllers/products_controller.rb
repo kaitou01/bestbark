@@ -2,6 +2,7 @@
 class ProductsController < ApplicationController
   before_action :initialize_session
   before_action :load_shopping_cart, only: [:show, :load_shopping_cart]
+  skip_before_action :verify_authenticity_token, only: [:generate_invoice]
 
   def index
     # @products = Product.order(:name).page(params[:page]).per(5)
@@ -17,13 +18,21 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
   end
 
-  # def show_shopping_cart
-  #
-  #   @shopping_cart = session[:products_to_buy]
-  #   @shopping_cart.each do |s|
-  #     s["id"] = Product.find(s["id"]) if s["id"].is_a? Integer
-  #   end
-  # end
+  def edit_customer_info
+    @provinces = Province.all
+  end
+
+  def generate_invoice
+    name = params[:name]
+    address = params[:address]
+    city = params[:city]
+    province_id = params[:province].to_i
+    postal = params[:postal]
+
+    #session[:customer_info] = {name: name, address: address, city: city, province: province_id, postal: postal}
+    @province = Province.find(province_id)
+    @products_to_buy = session[:products_to_buy]
+  end
 
   def add_to_cart
     id = params[:id].to_i
