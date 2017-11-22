@@ -35,13 +35,9 @@
                   = text_field_tag(:quantity, product["quantity"])
                   = submit_tag("Update")
               td.col-sm-1.col-md-1.text-center
-                strong
-                  | $
-                  = item["price"]
+                strong= format('$%.2f', item["price"].to_f.round(2))
               td.col-sm-1.col-md-1.text-center
-                strong
-                  | $
-                  = product_subtotal
+                strong= format('$%.2f', product_subtotal.round(2))
               td.col-sm-1.col-md-1
               td.col-sm-1.col-md-1
                 = link_to "Remove", remove_item_from_cart_product_path(item["id"]), method: :post
@@ -53,13 +49,11 @@
             h5 Subtotal
           td.text-right
             h5
-              strong= order_subtotal
+              strong= format('$%.2f', order_subtotal.round(2))
         tr
           td  
           td  
           td  
           td
           td
-            button.btn.btn-success type="button"
-              | Checkout
-              span.glyphicon.glyphicon-play
+            = link_to "Checkout", edit_customer_info_path
