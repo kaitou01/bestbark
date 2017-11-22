@@ -1,0 +1,18 @@
+h3 Step 1 - Customer Information
+= form_tag(generate_invoice_path, method: :post) do
+  .form-group
+    = label_tag(:name, 'Name')
+    = text_field_tag(:name, nil, required: true, class: "form-control")
+  .form-group
+    = label_tag(:address, 'Address')
+    = text_field_tag(:address, nil, required: true, class: "form-control")
+  .form-group
+    = label_tag(:city, 'City')
+    = text_field_tag(:city, nil, required: true, class: "form-control")
+  .form-group
+    = label_tag(:province, 'Province')
+    = select_tag(:province, options_from_collection_for_select(@provinces,"id","name"), class: "form-control")
+  .form-group
+    = label_tag(:postal, 'Postal Code')
+    = text_field_tag(:postal, nil, required: true, class: "form-control")
+  = submit_tag("Next")
