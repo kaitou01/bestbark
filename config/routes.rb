@@ -13,6 +13,10 @@ Rails.application.routes.draw do
 
   post 'update-quantity', to: 'products#update_item', as: 'update_item'
 
+  get 'customer-info', to: 'products#edit_customer_info', as: 'edit_customer_info'
+
+  post 'order-invoice', to: 'products#generate_invoice', as: 'generate_invoice'
+
   resources :products, only: [:show] do
     member do
       post :add_to_cart
