@@ -14,14 +14,14 @@ class Product < ApplicationRecord
     :size => { :in => 0..200.kilobytes }
 
   def self.search(search, category)
-  if search
-    if category != ''
-      order(:name).where('name LIKE ?', "%#{search}%").where('category_id = ?', category)
+    if search
+      if category != ''
+        order(:name).where('name LIKE ?', "%#{search}%").where('category_id = ?', category)
+      else
+        order(:name).where('name LIKE ?', "%#{search}%")
+      end
     else
-      order(:name).where('name LIKE ?', "%#{search}%")
+      order(:name)
     end
-  else
-    order(:name)
   end
-end
 end
