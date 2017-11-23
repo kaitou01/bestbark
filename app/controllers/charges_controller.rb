@@ -48,6 +48,9 @@ class ChargesController < ApplicationController
       line_item.save
     end
 
+    session[:products_to_buy] = []
+    session[:customer_info] = {}
+
     rescue Stripe::CardError => e
     flash[:error] = e.message
     redirect_to new_charge_path(amount: (amount /100.0))
