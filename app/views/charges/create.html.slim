@@ -1,3 +1,6 @@
-h2
-  | Thanks, you paid
-  strong= number_to_currency(@charge.amount / 100.0)
+.jumbotron.top-margin
+  h2
+    | Thank you for shopping on
+    =link_to (image_tag 'bestbark.png', class:"logo"), root_path
+  =link_to root_path do
+    button.btn.btn-outline-primary Browse more products

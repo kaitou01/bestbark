@@ -11,8 +11,8 @@ h3 Step 1 - Customer Information
     = text_field_tag(:city, nil, required: true, class: "form-control")
   .form-group
     = label_tag(:province, 'Province')
-    = select_tag(:province, options_from_collection_for_select(@provinces,"id","name"), class: "form-control")
+    = select_tag(:province, options_from_collection_for_select(@provinces,"id","name"), class: "form-control select-province")
   .form-group
     = label_tag(:postal, 'Postal Code')
     = text_field_tag(:postal, nil, required: true, class: "form-control")
-  = submit_tag("Next")
+  = button_tag "Next", class: "btn btn-outline-dark"

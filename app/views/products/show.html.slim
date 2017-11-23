@@ -1,17 +1,18 @@
-.single-product
-  h2= @product.name
-  p= image_tag @product.image.url(:large)
-  h3
-    | $#{@product.price} (#{@product.quantity} left)
-  p= @product.description
-.single-product
-  - if @products_to_buy.any? {|p| p["product"]["id"] == @product.id}
-    = link_to remove_item_from_cart_product_path(@product.id), method: :post, class: "btn btn-info btn-lg" do
-      span.glyphicon.glyphicon-shopping-cart
-      | Remove from cart
-  - else
-    = form_tag(add_to_cart_product_path, method: :post) do
-      = hidden_field_tag(:id, @product.id)
-      = label_tag(:quantity, "Quantity:")
-      = text_field_tag(:quantity)
-      = submit_tag("Add to cart")
+.show-product.row.row-offcanvas.row-offcanvas-right
+  .col-12.col-md-5
+    .show-image= image_tag @product.image
+  .col-12.col-md-7.sidebar-offcanvas
+    h2
+      strong= @product.name
+    p= @product.description
+    h3
+      strong $#{@product.price}
+    - if @products_to_buy.any? {|p| p["product"]["id"] == @product.id}
+      = link_to remove_item_from_cart_product_path(@product.id), method: :post do
+        button.btn.btn-outline-danger Remove from cart
+    - else
+      = form_tag(add_to_cart_product_path, class: "form-inline mt-2 mt-md-0", method: :post) do
+        = hidden_field_tag(:id, @product.id)
+        = label_tag(:quantity, "Quantity:", class: "mr-sm-2")
+        = text_field_tag(:quantity, 1, class: "form-control mr-sm-2")
+        = button_tag "Add to cart", class: "btn btn-outline-info"

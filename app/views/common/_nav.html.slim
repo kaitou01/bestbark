@@ -1,21 +1,21 @@
 nav.navbar.navbar-expand-md.navbar-dark.bg-dark
-  div.container
-    = link_to (image_tag 'bestbark.png', class:"logo"), root_path
-    div.collapse.navbar-collapse
-      ul.navbar-nav.mr-auto
-        li.nav-item.active= link_to "Home", root_path, class:"nav-link"
-        li.nav-item= link_to "About", about_path, class:"nav-link"
-        li.nav-item= link_to "Contact", contact_path, class:"nav-link"
-        li.nav-item.dropdown
-          a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
-            | Categories
-          .dropdown-menu aria-labelledby="navbarDropdown"
-            - @categories.each do |category|
-              =link_to category.name, category_path(category.id), class: "dropdown-item"
-      =link_to cart_path, class: "btn btn-info btn-lg" do
-        span.glyphicon.glyphicon-shopping-cart
-        | Shopping Cart
-      = form_tag root_path, method: :get, class: "form-inline my-2 my-md-0" do
-        = text_field_tag :search, params[:search]
-        = select_tag(:category, options_for_select(@categories.map {|c| [c.name, c.id]}, params[:category]), { include_blank: "All"})
-        = submit_tag 'Search', name: nil
+  = link_to (image_tag 'bestbark.png', class:"logo"), root_path, class: "navbar-brand"
+  button.navbar-toggler aria-controls="navbarCollapse" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarCollapse" data-toggle="collapse" type="button"
+    span.navbar-toggler-icon
+  #navbarCollapse.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto
+      li.nav-item.active= link_to "Home", root_path, class:"nav-link"
+      li.nav-item= link_to "About", about_path, class:"nav-link"
+      li.nav-item= link_to "Contact", contact_path, class:"nav-link"
+      li.nav-item.dropdown
+        a#navbarDropdown.nav-link.dropdown-toggle aria-expanded="false" aria-haspopup="true" data-toggle="dropdown" href="#" role="button"
+          | Categories
+        .dropdown-menu aria-labelledby="navbarDropdown"
+          - @categories.each do |category|
+            =link_to category.name, category_path(category.id), class: "dropdown-item"
+    = link_to cart_path, {style: "margin-right: 2rem !important"} do
+      button.btn.btn-outline-info Shopping Cart
+    = form_tag root_path, method: :get, class: "form-inline mt-2 mt-md-0" do
+      = text_field_tag :search, params[:search], class: "form-control mr-sm-2", placeholder: "Search"
+      = select_tag :category, options_for_select(@categories.map {|c| [c.name, c.id]} << ["All", ""] , params[:category]), class: "form-control mr-sm-2"
+      = button_tag 'Search', name: nil, class: "btn btn-outline-primary my-2 my-sm-0"

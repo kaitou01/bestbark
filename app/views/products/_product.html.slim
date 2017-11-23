@@ -1,6 +1,6 @@
-.col-sm.card
-    = image_tag product.image.url(:large), class: "card-img-top"
-    .card-body
-      h4.card-title= link_to product.name, product_path(product.id)
-      p.card-text
-        | $#{product.price} (#{product.quantity} left)
+.col-6.col-lg-4
+  = link_to image_tag(product.image.url(:large), class: "product-img"), product_path(product.id)
+  .card-body
+    h4.card-title= product.name
+    p.card-text
+      strong $#{product.price}

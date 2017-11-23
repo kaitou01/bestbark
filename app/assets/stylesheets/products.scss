@@ -2,56 +2,77 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-// .product img {
-//   height: 220px;
-//   width: 220px;
+.show-image img{
+  box-shadow: 10px 10px 5px grey;
+  border-radius: .5em;
+}
+
+.product-img{
+  border-radius: .5em;
+  box-shadow: 1px 1px 1px 1px;
+}
+
+.jumbotron{
+  background-color: white !important;
+}
+
+.show-product{
+  padding-top: 50px;
+}
+
+.checkout-heading th{
+  color: white;
+}
+
+.select-province{
+  width: calc(80% - 22px) !important;
+}
+
+// .product {
+//      float: left;
+//      width: 250px;
+//      border: 1px solid #CCC;
+//      border-radius: 5px;
+//      width: 240px;
+//      height: 440px;
+//      padding-left: 20px;
+//      margin: 10px;
 // }
-
-.product {
-     float: left;
-     width: 250px;
-     border: 1px solid #CCC;
-     border-radius: 5px;
-     width: 240px;
-     height: 440px;
-     padding-left: 20px;
-     margin: 10px;
+//
+// .product h2{
+//   height: 104px;
+// }
+//
+// .categories ul{
+//     border:1px solid #ccc;
+//     border-width:1px;
+//     list-style:none;
+//     margin:0;
+//     padding:0;
+//     text-align:center;
+// }
+// .categories ul li{
+//     display:inline;
+//     font: 20px bold;
+// }
+// .categories ul li a{
+//     display:inline-block;
+//     padding: 10px 50px;
+// }
+//
+// .single-product {
+//   width: 500px;
+//   margin: auto;
+//   margin-top: 20px;
+//   border:1px solid #ccc;
+//   border-width: 1px;
+//   padding: 0px 20px;
+// }
+//
+.product-page {
+  margin-bottom: 50px;
 }
-
-.product h2{
-  height: 104px;
-}
-
-.categories ul{
-    border:1px solid #ccc;
-    border-width:1px;
-    list-style:none;
-    margin:0;
-    padding:0;
-    text-align:center;
-}
-.categories ul li{
-    display:inline;
-    font: 20px bold;
-}
-.categories ul li a{
-    display:inline-block;
-    padding: 10px 50px;
-}
-
-.single-product {
-  width: 500px;
-  margin: auto;
-  margin-top: 20px;
-  border:1px solid #ccc;
-  border-width: 1px;
-  padding: 0px 20px;
-}
-
-.page {
-  margin-bottom: 30px;
-}
-
-body {
-    margin-top:40px;
-}
+//
+// body {
+//     margin-top:40px;
+// }

@@ -1,11 +1,11 @@
 h3 Step 2 - Review Invoice
 table.table.table-hover
   thead
-    tr
-      th Product
-      th Quantity
-      th.text-center Price
-      th.text-center Total
+    tr.checkout-heading
+      th.bg-dark Product
+      th.text-center.bg-dark Quantity
+      th.text-center.bg-dark Price
+      th.text-center.bg-dark Total
   tbody
     - order_subtotal = 0
     - @products_to_buy.each do |product|
@@ -89,4 +89,5 @@ table.table.table-hover
       td.text-right
         h5
           strong= format('$%.2f', grand_total.round(2))
-= link_to "Proceed to payment", new_charge_path(amount: grand_total.round(2)), method: "post"
+= link_to new_charge_path(amount: grand_total.round(2)), method: "post" do
+  button.btn.btn-outline-dark Proceed to payment

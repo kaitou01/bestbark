@@ -1,5 +1,7 @@
-h1= @products.first.category.name
-.row
-  = render partial: 'product', collection: @products
-.page
-  = paginate @products
+.col-12.col-md-11
+  .jumbotron
+    h1= @products.first.category.name
+  .row
+    = render partial: 'product', collection: @products
+  .product-page
+    = paginate @products
