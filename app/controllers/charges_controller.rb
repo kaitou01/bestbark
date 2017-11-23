@@ -2,7 +2,6 @@ class ChargesController < ApplicationController
   def new
     @amount = (params[:amount].to_f * 100).to_i
     @description = 'Description of Charge'
-    @session = session[:customer_info]
   end
 
   def create
