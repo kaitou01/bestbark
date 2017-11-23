@@ -1,7 +1,7 @@
 class ChargesController < ApplicationController
   def new
     @amount = (params[:amount].to_f * 100).to_i
-    @description = 'Description of Charge'
+    @description = 'Payment'
   end
 
   def create
