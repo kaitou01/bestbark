@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  post 'payment', to: 'charges#new', as: 'new_charge'
+
+  post 'payment-success', to: 'charges#create', as: 'charges_create'
+
   root to: 'products#index'
 
   get 'category/:id', to: 'products#show_by_category', as: 'category', id: /\d+/

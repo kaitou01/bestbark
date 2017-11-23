@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
     province_id = params[:province].to_i
     postal = params[:postal]
 
-    #session[:customer_info] = {name: name, address: address, city: city, province: province_id, postal: postal}
+    session[:customer_info] = {name: name, address: address, city: city, province: province_id, postal: postal}
     @province = Province.find(province_id)
     @products_to_buy = session[:products_to_buy]
   end
