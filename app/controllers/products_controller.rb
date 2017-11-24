@@ -64,7 +64,7 @@ class ProductsController < ApplicationController
       s["quantity"] = quantity if s["product"]["id"] == id
     end
 
-    redirect_back fallback_location: root_path, notice: "Updated."
+    redirect_back fallback_location: root_path, notice: "Item quantity updated."
   end
 
   private

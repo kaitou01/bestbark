@@ -1,5 +1,9 @@
+.top-margin
+  - if flash[:notice]
+    .alert.alert-success
+      = flash[:notice]
 - if @products_to_buy != []
-  .row.top-margin
+  .row
     .col-sm-12
       table.table.table-hover.table-responsive
         thead
