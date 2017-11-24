@@ -15,7 +15,7 @@ table.table.table-hover
       tr
         td.col-sm-8.col-md-6
           .media
-            = link_to image_tag(item["image"], class: "media-object", style: "width: 72px; height: 72px;"),  product_path(item["id"]), class: "thumbnail pull-left"
+            = link_to image_tag(item["image"]["url"], class: "media-object", style: "width: 72px; height: 72px;"),  product_path(item["id"]), class: "thumbnail pull-left"
             .media-body
               h4.media-heading
                 = link_to truncate(item["name"], length: 30)

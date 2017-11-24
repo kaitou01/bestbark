@@ -55,9 +55,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # PROJECT SPECIFIC GEMS
 gem 'activeadmin', github: 'activeadmin'
 gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'carrierwave', '~> 1.0'
 gem 'devise'
 gem 'jquery-rails'
 gem 'kaminari'
-gem 'paperclip'
 gem 'slim-rails'
 gem 'stripe'
