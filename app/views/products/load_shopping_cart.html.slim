@@ -1,7 +1,7 @@
 - if @products_to_buy != []
   .row.top-margin
     .col-sm-12
-      table.table.table-hover
+      table.table.table-hover.table-responsive
         thead
           tr.checkout-heading
             th.bg-dark Product
@@ -49,15 +49,9 @@
             td.text-center
               h5
                 strong= format('$%.2f', order_subtotal.round(2))
-            td  
-          tr
             td
-              = link_to edit_customer_info_path do
-                button.btn.btn-outline-info Checkout
-            td            
-            td  
-            td  
-            td
+      = link_to edit_customer_info_path do
+        button.btn.btn-outline-info Checkout
 - else
   .jumbotron.top-margin
     h1 Shopping cart is empty
