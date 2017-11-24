@@ -1,0 +1,57 @@
+table
+  thead
+    tr
+      th style="background-color: #343a40; color: white;" Customers
+      th style="background-color: #343a40; color: white;border: 1px solid black;" Orders
+  tbody
+    - @customer_order.each do |c|
+      - if !c.orders.nil?
+        tr
+          td style="border: 1px solid black;"
+            h4
+              |Customer Name:&nbsp;
+              = c.name
+            h4
+              |Address:&nbsp;
+              = c.address
+            h4
+              |City:&nbsp;
+              = c.city
+            h4
+              |Province:&nbsp;
+              = c.province.name
+            h4
+              |Postal Code:&nbsp;
+              = c.postal_code
+          td style="border: 1px solid black;"
+            table
+              tbody
+                - c.orders.each_with_index do |o, e|
+                  - grand_total = 0
+                  - o.line_items.each { |z| grand_total += z.price}
+                  - grand_total += ((grand_total * o.pst_rate) + (grand_total * o.gst_rate) + (grand_total * o.hst_rate))
+                  tr
+                    td style="border: 1px solid black;"
+                      h4
+                        |Order #:&nbsp;
+                        = e + 1
+                      h4
+                        |Status:&nbsp;
+                        = o.status
+                      h4
+                        |Total:&nbsp;
+                        = number_to_currency(grand_total)
+                    - o.line_items.each_with_index do |l, i|
+                      td style="border: 1px solid black;"
+                        h4
+                          |Item #:&nbsp;
+                          = i + 1
+                        h4
+                          |Product Name:&nbsp;
+                          = l.product.name
+                        h4
+                          |Quantity:&nbsp;
+                          = l.quantity
+                        h4
+                          |Price:&nbsp;
+                          = number_to_currency(l.price)
