@@ -51,13 +51,13 @@
                 strong= format('$%.2f', order_subtotal.round(2))
             td  
           tr
-            td  
-            td  
-            td
             td
               = link_to edit_customer_info_path do
                 button.btn.btn-outline-info Checkout
+            td            
             td  
+            td  
+            td
 - else
   .jumbotron.top-margin
     h1 Shopping cart is empty
