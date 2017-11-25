@@ -5,54 +5,61 @@ class ChargesController < ApplicationController
   end
 
   def create
-    amount = params[:amount].to_i
-    cust_info = session[:customer_info]
-    order_items = session[:products_to_buy]
-
     @customer = Stripe::Customer.create(email:  params[:stripeEmail],
-                                       source: params[:stripeToken])
+                                        source: params[:stripeToken])
 
     @charge = Stripe::Charge.create(customer:    @customer.id,
-                                    amount:      amount,
+                                    amount:      params[:amount].to_i,
                                     description: 'Rails Stripe customer',
                                     currency:    'cad')
+    find_customer
+    empty_session
+  rescue Stripe::CardError
+    redirect_to cart_path
+  end
 
-    cust = Customer.where(name: cust_info["name"],
-                          address: cust_info["address"],
-                          city: cust_info["city"],
-                          province_id: cust_info["province"],
-                          postal_code: cust_info["postal"]).first
+  def find_customer
+    cust_info = session[:customer_info]
+    cust = Customer.where(name: cust_info['name'], address: cust_info['address'],
+                          city: cust_info['city'], province_id: cust_info['province'],
+                          postal_code: cust_info['postal']).first
+    insert_customer(cust, cust_info)
+  end
 
+  def insert_customer(cust, cust_info)
     if cust.nil?
-      cust = Customer.create(name: cust_info["name"],
-                             address: cust_info["address"],
-                             city: cust_info["city"],
-                             province_id: cust_info["province"],
-                             postal_code: cust_info["postal"])
+      cust = Customer.create(name: cust_info['name'], address: cust_info['address'],
+                             city: cust_info['city'], province_id: cust_info['province'],
+                             postal_code: cust_info['postal'])
     end
+    insert_order(cust)
+  end
 
+  def insert_order(cust)
     order = cust.orders.build
     order.status = 'paid'
     order.pst_rate = cust.province.pst
     order.gst_rate = cust.province.gst
     order.hst_rate = cust.province.hst
     order.save
+    insert_line_item(order)
+  end
 
+  def insert_line_item(order)
+    order_items = session[:products_to_buy]
     order_items.each do |o|
-      prod = Product.find(o["product"]["id"].to_i)
+      prod = Product.find(o['product']['id'].to_i)
 
       line_item = order.line_items.build
       line_item.product = prod
-      line_item.quantity = o["quantity"].to_i
+      line_item.quantity = o['quantity'].to_i
       line_item.price = prod.price
       line_item.save
     end
+  end
 
-    session[:products_to_buy] = []
+  def empty_session
     session[:customer_info] = {}
-
-    rescue Stripe::CardError => e
-    flash[:error] = e.message
-    redirect_to new_charge_path(amount: (amount /100.0))
+    session[:products_to_buy] = []
   end
 end
